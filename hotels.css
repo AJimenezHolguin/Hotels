@@ -1,18 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&family=Roboto+Serif&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-/* CONTAINER header */
+
+/* CONTAINER HEADER*/
 .container-header {
-  /* background-color: blue; */
   background-image: url(images/playa-mar2.png);
   padding: 48px 48px 28px;
   height: 300px;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 /* TITLE HEADER */
 .title {
@@ -47,7 +48,6 @@
   background-position-y: center;
   background-position-x: 1px;
   padding-left: 15px;
-  /* border: none; */
 }
 .date-out {
   background-image: url(images/checkout.png);
@@ -55,7 +55,6 @@
   background-position-y: center;
   background-position-x: 1px;
   padding-left: 18px;
-  /* border:none; */
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
   width: 55px;
@@ -102,14 +101,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .card {
   padding-top: 25px;
   position: relative;
-  /* border: 2px solid red; */
 }
 .images {
   width: 480px;
   border-radius: 20px;
   filter: brightness(0.7);
   height: 280px;
-  /* border: 3px solid purple; */
 }
 .hotel-name {
   color: #fff;
@@ -120,13 +117,34 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .hotel-country,
 .hotel-numbers {
+  font-family: "Roboto Serif", serif;
   color: #fff;
   transform: translateY(-100px);
-  margin: 0 30px;
+  margin: 0 31px;
   width: 30%;
-  /* border: 1px solid orangered; */
+}
+.hotel-country {
+  margin-left: 55px;
 }
 .hotel-numbers {
   display: flex;
   gap: 5px;
+}
+.img-flag {
+  position: absolute;
+  bottom: 16%;
+  left: 4%;
+  margin: 0 0 0 10px;
+  transform: translateY(5px);
+  width: 24px;
+}
+.button-book {
+  background: rgba(51, 51, 51, 0.7);
+  color: white;
+  font-weight: bold;
+  margin-left: 380px;
+  transform: translateY(-130px);
+  padding: 5px 10px;
+  border-radius: 8px;
+  border-color: #fff;
 }

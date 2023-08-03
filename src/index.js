@@ -1,14 +1,16 @@
 import { requestingHotels } from "./hotels.js";
 
-// function getFlagImageUrl(country){
-//     const hotelCountry = `./images/${country}-flag.png`;
-//     return hotelCountry;
-// }
+function getFlagImageUrl(country) {
+  const flagp = `./images/${country}-flag.png`;
+  return flagp;
+}
 
-// const buttonConsulta = document.getElementById("filter");
+function getPriceText(price) {
+  return "$".repeat(price);
+}
+
 const main = document.querySelector(".container-general_cards");
 
-// buttonConsulta.addEventListener("click", async ()=> {
 const respuesta = await requestingHotels();
 const data = await respuesta.json();
 console.log(data);
@@ -28,7 +30,14 @@ data.forEach((hotel) => {
   nombreHotel.innerText = hotel.name;
   nombreHotel.className = "hotel-name";
   cardHotel.appendChild(nombreHotel);
-  // CONTAINER-COUNTRY
+
+  const imgFlag = document.createElement("img");
+  imgFlag.src = getFlagImageUrl(hotel.country);
+  imgFlag.alt = `flag of ${hotel.country}`;
+  imgFlag.classList.add("img-flag");
+  cardHotel.appendChild(imgFlag);
+
+  // CONTAINER-COUNTRY-NAME}
   const hotelCountry = document.createElement("div");
   hotelCountry.className = "hotel-country";
   hotelCountry.innerText = hotel.country;
@@ -40,12 +49,17 @@ data.forEach((hotel) => {
   //PARAGRAPH ROOMS
   const hotelrooms = document.createElement("p");
   hotelrooms.className = "hotel-rooms";
-  hotelrooms.innerText = `${hotel.rooms} rooms`;
+  hotelrooms.innerText = `${hotel.rooms} rooms -`;
   hotelNumbers.appendChild(hotelrooms);
   //PARAGRAPH PRICES
-  const hotelPrices = document.createElement("p");
-  hotelPrices.className = "hotel-prices";
-  hotelPrices.innerText = `- ${hotel.price}`;
-  hotelNumbers.appendChild(hotelPrices);
+  const priceSimbol = document.createElement("p");
+  priceSimbol.textContent = getPriceText(hotel.price);
+  priceSimbol.classList.add("paragraph-priceSimbol");
+  hotelNumbers.appendChild(priceSimbol);
+
+  //BUTTON BOOK IT
+  const buttonBook = document.createElement("button");
+  buttonBook.className = "button-book";
+  buttonBook.innerText = "Book it!";
+  cardHotel.appendChild(buttonBook);
 });
-// });
