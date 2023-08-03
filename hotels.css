@@ -1,120 +1,132 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-.container-header{
-    background-color:blue;
-    background-image: url(images/playa-mar2.png);
-    padding: 48px 48px 28px;
-    height:300px;
-    background-size:cover;
-    background-repeat: no-repeat;
-     
-      
-} 
-   
-.title{
-    font-size:60px;
-    font-family: 'Pacifico', cursive;
-    color: white;
-    
-    
+/* CONTAINER header */
+.container-header {
+  /* background-color: blue; */
+  background-image: url(images/playa-mar2.png);
+  padding: 48px 48px 28px;
+  height: 300px;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-.filter-container{
-    display:flex;
-    justify-content: flex-start; 
-    gap:10px;
+/* TITLE HEADER */
+.title {
+  font-size: 60px;
+  font-family: "Pacifico", cursive;
+  color: white;
 }
-.filter_countries,.date,.filter-sizes,.filter-prices{
-    width:165px;
-    padding: 5px 5px;
-    font-size:15px;   
+.filter-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
 }
-.filter_clear{
-    width:100px;
-    border-radius: 10px;
-    font-size:15px;  
-    background-color: #333; 
-    color: white;
-    border:1px solid white;
+.filter_countries,
+.date,
+.filter-sizes,
+.filter-prices {
+  width: 165px;
+  padding: 5px 5px;
+  font-size: 15px;
 }
-.paragraph{
-    font-family: 'Dancing Script', cursive;
-    font-size: 40px;
-    color: #fff;
-    font-weight:bold;
-    margin-top:18px;
+/* FILTERS */
+.filter_countries {
+  background-image: url(images/locator.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: 1px;
+  padding-left: 12px;
 }
-.paragraph_2{
-    color:#fff;
+.date-in {
+  background-image: url(images/checkin.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: 1px;
+  padding-left: 15px;
+  /* border: none; */
 }
-.container-general_cards{
-    display:grid;
-    grid-template-columns:repeat(2 , 1fr);
-    justify-items: center;
-    
-   
-}
-.card{
-    padding-top:25px;
-    position: relative;
-    border:2px solid red; 
-}
-.images{
-width: 480px;
-border-radius:20px; 
-filter:brightness(0.7)
-
- 
-}
-.hotel-name{
-color: #fff;
-font-weight: bold;
-font-size: 32px;
-margin: 0 30px;
-transform: translateY(-100px);   
-
-}
-.filter_countries{
-    background-image: url(images/locator.png);
-    background-repeat: no-repeat;
-    background-position-y: center;
-    background-position-x: 1px;
-    padding-left:12px;
-}
-.date-in{
-    background-image: url(images/checkin.png);
-    background-repeat: no-repeat;
-    background-position-y: center;
-    background-position-x: 1px;
-    padding-left:15px;
-    /* border: none; */
+.date-out {
+  background-image: url(images/checkout.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: 1px;
+  padding-left: 18px;
+  /* border:none; */
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
-    opacity: 0;
+  width: 55px;
+  opacity: 0;
 }
-.date-out{
-    background-image: url(images/checkout.png);
-    background-repeat: no-repeat;
-    background-position-y: center;
-    background-position-x: 1px;
-    padding-left: 18px;
-    /* border:none; */
+.filter-prices {
+  background-image: url(images/money.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  padding-left: 10px;
 }
-.filter-prices{
-    background-image: url(images/money.png);
-    background-repeat: no-repeat;
-    background-position-y: center;
-    padding-left:10px;
+.filter-sizes {
+  background-image: url(images/rooms.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: 3px;
+  padding-left: 20px;
 }
-.filter-sizes{
-    background-image: url(images/rooms.png);
-    background-repeat: no-repeat;
-    background-position-y: center;
-    background-position-x: 3px;
-    padding-left:20px;
+.filter_clear {
+  width: 100px;
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: #333;
+  color: white;
+  border: 1px solid white;
+}
+.paragraph {
+  font-family: "Dancing Script", cursive;
+  font-size: 40px;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 18px;
+}
+.paragraph_2 {
+  color: #fff;
+}
+.container-general_cards {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  grid-template-rows: repeat(18, 310px);
+}
+.card {
+  padding-top: 25px;
+  position: relative;
+  /* border: 2px solid red; */
+}
+.images {
+  width: 480px;
+  border-radius: 20px;
+  filter: brightness(0.7);
+  height: 280px;
+  /* border: 3px solid purple; */
+}
+.hotel-name {
+  color: #fff;
+  font-weight: bold;
+  font-size: 32px;
+  margin: 0 30px;
+  transform: translateY(-100px);
+}
+.hotel-country,
+.hotel-numbers {
+  color: #fff;
+  transform: translateY(-100px);
+  margin: 0 30px;
+  width: 30%;
+  /* border: 1px solid orangered; */
+}
+.hotel-numbers {
+  display: flex;
+  gap: 5px;
 }
