@@ -1,4 +1,4 @@
-import { requestingHotels } from "./hotels.js";
+import { requestingHotels } from "./src/hotels.js";
 
 function getFlagImageUrl(country) {
   const flagp = `./images/${country}-flag.png`;
@@ -62,4 +62,23 @@ data.forEach((hotel) => {
   buttonBook.className = "button-book";
   buttonBook.innerText = "Book it!";
   cardHotel.appendChild(buttonBook);
+
 });
+
+  const filterCountries = document.getElementById("filter-countries");
+  console.log(filterCountries);
+  filterCountries.addEventListener("change", ()=>{
+    let valorOption = filterCountries.value;
+    console.log(valorOption);
+    let optionSelect = filterCountries.options[filterCountries.selectedIndex];
+    console.log(optionSelect);
+  })
+
+  
+  
+  const tarjetas = document.querySelector(".container-general_cards");
+  console.log(tarjetas);
+
+      
+   
+ 
