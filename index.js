@@ -15,6 +15,8 @@ const respuesta = await requestingHotels();
 const data = await respuesta.json();
 console.log(data);
 
+function loadInformation(data) {
+
 data.forEach((hotel) => {
   const cardHotel = document.createElement("div");
   cardHotel.className = "card";
@@ -62,28 +64,31 @@ data.forEach((hotel) => {
   buttonBook.className = "button-book";
   buttonBook.innerText = "Book it!";
   cardHotel.appendChild(buttonBook);
-
-  
-
 });
+}
+
+ loadInformation(data);
 
   const filterCountries = document.getElementById("filter-countries");
   console.log(filterCountries);
-  // const tarjetas = document.querySelector(".container-general_cards");
-  // console.log(tarjetas);
-  
  
   filterCountries.addEventListener("change", ()=>{
     let valorOption = filterCountries.value;
     console.log(valorOption);
     let optionSelect = filterCountries.options[filterCountries.selectedIndex];
-    console.log(filterCountries.selectedIndex);
+    console.log(optionSelect);
+    const textSelected = optionSelect.textContent;
+    console.log(textSelected);
     
-    const filteredData = data.filter(hotel => hotel.country == optionSelect.value);
-    // console.log(filteredData);
-    console.log(optionSelect.value);
-    // const tarjetas = document.querySelector(".container-general_cards");
-    // console.log(tarjetas);
+    let  filteredData = data;
+    if(valorOption != "all"){
+     
+     filteredData = data.filter(hotel => hotel.country == textSelected);
+     console.log(filteredData);   
+    } 
+    main.innerHTML = '';
+    loadInformation(filteredData);
+     
   })
 
    
