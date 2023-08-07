@@ -88,7 +88,7 @@ data.forEach((hotel) => {
     } 
     main.innerHTML = '';
     loadInformation(filteredData);
-     
+    
   })
 
    
