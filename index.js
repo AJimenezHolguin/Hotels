@@ -63,22 +63,28 @@ data.forEach((hotel) => {
   buttonBook.innerText = "Book it!";
   cardHotel.appendChild(buttonBook);
 
+  
+
 });
 
   const filterCountries = document.getElementById("filter-countries");
   console.log(filterCountries);
+  // const tarjetas = document.querySelector(".container-general_cards");
+  // console.log(tarjetas);
+  
+ 
   filterCountries.addEventListener("change", ()=>{
     let valorOption = filterCountries.value;
     console.log(valorOption);
     let optionSelect = filterCountries.options[filterCountries.selectedIndex];
-    console.log(optionSelect);
+    console.log(filterCountries.selectedIndex);
+    
+    const filteredData = data.filter(hotel => hotel.country == optionSelect.value);
+    // console.log(filteredData);
+    console.log(optionSelect.value);
+    // const tarjetas = document.querySelector(".container-general_cards");
+    // console.log(tarjetas);
   })
 
-  
-  
-  const tarjetas = document.querySelector(".container-general_cards");
-  console.log(tarjetas);
-
-      
    
  
