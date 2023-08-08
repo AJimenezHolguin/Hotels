@@ -96,7 +96,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 100%;
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
-  grid-template-rows: repeat(18, 310px);
+  grid-template-rows: repeat(9, 310px);
 }
 .card {
   padding-top: 25px;
