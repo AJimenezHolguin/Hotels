@@ -89,6 +89,8 @@ filterCountries.addEventListener("change", () => {
   main.innerHTML = "";
   loadInformation(filteredData);
 });
+// FILTER DATE
+
 // FILTER PRICES
 const filterPrices = document.getElementById("filter-prices");
 console.log(filterPrices);
@@ -114,7 +116,6 @@ filterPrices.addEventListener("change", () => {
 const resetBtn = document.getElementById("filter");
 console.log(resetBtn);
 resetBtn.addEventListener("click", () => {
-  console.log(resetBtn);
   // Restablecer el valor seleccionado del select a su opción predeterminada
   filterCountries.selectedIndex = 0;
   // Mostrar todos los hoteles nuevamente
