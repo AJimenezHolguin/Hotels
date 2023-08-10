@@ -112,12 +112,79 @@ filterPrices.addEventListener("change", () => {
   main.innerHTML = "";
   loadInformation(filteredPriceData);
 });
+
+// FILTER DATE
+const dateCheckIn = document.getElementById("checkIn");
+const dateCheckOut = document.getElementById("checkOut");
+
+const today = new Date();
+console.log(today);
+
+function zerodate(dateZero) {
+  const converText = "" + dateZero;
+  if (converText.length === 1) {
+    return "0" + dateZero;
+  } else {
+    return dateZero;
+  }
+}
+
+const day = today.getDate();
+const month = today.getMonth() + 1;
+const year = today.getFullYear();
+
+const dateCheckInHotels = year + "-" + zerodate(month) + "-" + zerodate(day);
+const dateCheckOutHotels =
+  year + "-" + zerodate(month) + "-" + zerodate(day + 1);
+console.log(dateCheckInHotels);
+console.log(dateCheckOutHotels);
+
+dateCheckIn.setAttribute("min", dateCheckInHotels);
+dateCheckOut.setAttribute("min", dateCheckOutHotels);
+
+dateCheckIn.addEventListener("change", () => {
+  let optionCheckIn = new Date(dateCheckIn.value);
+  console.log(optionCheckIn);
+});
+dateCheckOut.addEventListener("change", () => {
+  let optionCheckOut = new Date(dateCheckOut.value);
+  console.log(optionCheckOut);
+});
+
+function calculateDifferenceDays() {
+  const optionCheckIn = new Date(dateCheckIn.value);
+  const optionCheckOut = new Date(dateCheckOut.value);
+
+  // Calcula la diferencia en milisegundos entre las dos fechas
+  const differenceInMilliseconds = optionCheckOut - optionCheckIn;
+  console.log(differenceInMilliseconds);
+  // Convierte milisegundos a días
+  const millisecondsInADay = 24 * 60 * 60 * 1000; // 86,400,000
+  const differenceInDays = Math.round(
+    differenceInMilliseconds / millisecondsInADay
+  );
+
+  console.log("Diferencia en días:", differenceInDays);
+}
+dateCheckIn.value = "";
+dateCheckOut.value = "";
+
+dateCheckIn.addEventListener("change", calculateDifferenceDays);
+dateCheckOut.addEventListener("change", calculateDifferenceDays);
+
+
+
+
+
 // DELETE FILTER BUTTON CLEAR
 const resetBtn = document.getElementById("filter");
-console.log(resetBtn);
+// console.log(resetBtn);
 resetBtn.addEventListener("click", () => {
   // Restablecer el valor seleccionado del select a su opción predeterminada
   filterCountries.selectedIndex = 0;
+
+  dateCheckIn.value = "";
+  dateCheckOut.value = "";
   // Mostrar todos los hoteles nuevamente
   main.innerHTML = "";
   loadInformation(data);
