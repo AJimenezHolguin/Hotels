@@ -57,7 +57,7 @@
   padding-left: 18px;
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
-  width: 55px;
+  width: 40px;
   opacity: 0;
 }
 .filter-prices {

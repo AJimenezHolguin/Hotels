@@ -116,9 +116,7 @@ filterPrices.addEventListener("change", () => {
 // FILTER DATE
 const dateCheckIn = document.getElementById("checkIn");
 const dateCheckOut = document.getElementById("checkOut");
-
 const today = new Date();
-console.log(today);
 
 function zerodate(dateZero) {
   const converText = "" + dateZero;
@@ -136,43 +134,59 @@ const year = today.getFullYear();
 const dateCheckInHotels = year + "-" + zerodate(month) + "-" + zerodate(day);
 const dateCheckOutHotels =
   year + "-" + zerodate(month) + "-" + zerodate(day + 1);
-console.log(dateCheckInHotels);
-console.log(dateCheckOutHotels);
 
 dateCheckIn.setAttribute("min", dateCheckInHotels);
 dateCheckOut.setAttribute("min", dateCheckOutHotels);
 
 dateCheckIn.addEventListener("change", () => {
+  const parts = dateCheckIn.value.split("-");
+
+  const year = parseInt(parts[0]);
+  const month = parseInt(parts[1]);
+  const day = parseInt(parts[2]);
+
+  const finalDate = year + "-" + zerodate(month) + "-" + zerodate(day + 1);
+  dateCheckOut.setAttribute("min", finalDate);
+
   let optionCheckIn = new Date(dateCheckIn.value);
-  console.log(optionCheckIn);
 });
 dateCheckOut.addEventListener("change", () => {
   let optionCheckOut = new Date(dateCheckOut.value);
-  console.log(optionCheckOut);
 });
 
 function calculateDifferenceDays() {
-  const optionCheckIn = new Date(dateCheckIn.value);
+  const currentDateIni = new Date();
+  currentDateIni.setHours(0, 0, 0, 0);
+  const currentDateMilliseconds = currentDateIni.getTime();
+  const optionCheckInIni = new Date(dateCheckIn.value + " 00:00:00");
+  optionCheckInIni.setHours(0, 0, 0, 0);
+  const optionCheckIn = optionCheckInIni.getTime();
   const optionCheckOut = new Date(dateCheckOut.value);
 
+  const resultCheckIn = optionCheckIn - currentDateMilliseconds;
+  console.log(resultCheckIn);
+
   // Calcula la diferencia en milisegundos entre las dos fechas
-  const differenceInMilliseconds = optionCheckOut - optionCheckIn;
-  console.log(differenceInMilliseconds);
+  const millisecondsDate = optionCheckOut - optionCheckIn;
+
   // Convierte milisegundos a días
   const millisecondsInADay = 24 * 60 * 60 * 1000; // 86,400,000
-  const differenceInDays = Math.round(
-    differenceInMilliseconds / millisecondsInADay
-  );
 
-  console.log("Diferencia en días:", differenceInDays);
+  const differenceInMilliseconds =
+    Math.round(millisecondsDate / millisecondsInADay) * millisecondsInADay;
+  console.log("Booking in milliseconds:", differenceInMilliseconds);
+  
+  let filterCurrentDateIni = data;
+  if (resultCheckIn == 0 ) {
+    filterCurrentDateIni = data.filter((hotel) => hotel.availabilityFrom == resultCheckIn);
+    console.log(filterCurrentDateIni);
+  }
 }
 dateCheckIn.value = "";
 dateCheckOut.value = "";
 
 dateCheckIn.addEventListener("change", calculateDifferenceDays);
 dateCheckOut.addEventListener("change", calculateDifferenceDays);
-
-
 
 
 
