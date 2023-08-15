@@ -70,6 +70,9 @@ loadInformation(data);
 // FILTER COUNTRIES
 const filterCountries = document.getElementById("filter-countries");
 filterCountries.addEventListener("change", () => {
+  filterPrices.selectedIndex = 0;
+  dateCheckIn.value = "";
+  dateCheckOut.value = "";
   let valorOption = filterCountries.value;
   let optionSelect = filterCountries.options[filterCountries.selectedIndex];
   const textSelected = optionSelect.textContent;
@@ -84,6 +87,9 @@ filterCountries.addEventListener("change", () => {
 // FILTER PRICES
 const filterPrices = document.getElementById("filter-prices");
 filterPrices.addEventListener("change", () => {
+  filterCountries.selectedIndex = 0;
+  dateCheckIn.value = "";
+  dateCheckOut.value = "";
   let priceOptions = filterPrices.value;
   let priceSelect = filterPrices.options[filterPrices.selectedIndex];
   const textPreiceSelected = priceSelect.textContent;
@@ -167,6 +173,8 @@ dateCheckIn.value = "";
 dateCheckOut.value = "";
 dateCheckIn.addEventListener("change", calculateDifferenceDays);
 dateCheckOut.addEventListener("change", function () {
+  filterCountries.selectedIndex = 0;
+  filterPrices.selectedIndex = 0;
   dateCheckOutSelected = true;
   calculateDifferenceDays();
 });
@@ -175,6 +183,7 @@ dateCheckOut.addEventListener("change", function () {
 const resetBtn = document.getElementById("filter");
 resetBtn.addEventListener("click", () => {
   filterCountries.selectedIndex = 0;
+  filterPrices.selectedIndex = 0;
   dateCheckIn.value = "";
   dateCheckOut.value = "";
   dateCheckOutSelected = false;
