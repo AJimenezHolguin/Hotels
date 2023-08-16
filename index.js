@@ -16,6 +16,7 @@ function symbolToNumber(text) {
 const main = document.querySelector(".container-general_cards");
 const respuesta = await requestingHotels();
 const data = await respuesta.json();
+let filteredData = data;
 function loadInformation(data) {
   data.forEach((hotel) => {
     const cardHotel = document.createElement("div");
@@ -66,40 +67,87 @@ function loadInformation(data) {
     cardHotel.appendChild(buttonBook);
   });
 }
+
+function ApllyStyleMessage() {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.style.margin = "10px 0 0 15px";
+  messageContainer.style.fontSize = "25px";
+  messageContainer.style.width = "97%";
+  messageContainer.style.backgroundColor = "#808080";
+  messageContainer.style.borderRadius = "8px";
+  messageContainer.style.textAlign = "center";
+  messageContainer.style.color = "white";
+}
+
+function showMessage(message) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.textContent = message;
+}
+
+let shouldShowMessage = false;
+function applyFilters() {
+  let tempData = data;
+
+  // Apply country filter
+  const selectedCountry = filterCountries.value;
+  let optionSelect = filterCountries.options[filterCountries.selectedIndex];
+  const textSelected = optionSelect.textContent;
+  if (selectedCountry != "all") {
+    tempData = tempData.filter((hotel) => hotel.country == textSelected);
+  }
+  // Apply price filter
+  const selectedPrice = filterPrices.value;
+  let priceSelect = filterPrices.options[filterPrices.selectedIndex];
+  const textPreiceSelected = priceSelect.textContent;
+  const changeToNumber = symbolToNumber(textPreiceSelected);
+  if (selectedPrice != "All") {
+    tempData = tempData.filter((hotel) => hotel.price == changeToNumber);
+  }
+  // Apply date filter
+  if (dateCheckOutSelected) {
+    const differenceInMilliseconds = calculateDifferenceDays();
+    tempData = tempData.filter((hotel) =>
+      isHotelAvailable(hotel, differenceInMilliseconds)
+    );
+  }
+  filteredData = tempData;
+  shouldShowMessage = filteredData.length > 0;
+
+  const messageContainer = document.getElementById("message-container");
+  if (filteredData.length == 0) {
+    messageContainer.textContent = "Sorry we don't have hotels available";
+  }
+}
+
+ApllyStyleMessage();
 loadInformation(data);
+
 // FILTER COUNTRIES
 const filterCountries = document.getElementById("filter-countries");
 filterCountries.addEventListener("change", () => {
-  filterPrices.selectedIndex = 0;
-  dateCheckIn.value = "";
-  dateCheckOut.value = "";
-  let valorOption = filterCountries.value;
-  let optionSelect = filterCountries.options[filterCountries.selectedIndex];
-  const textSelected = optionSelect.textContent;
-  let filteredData = data;
-  if (valorOption != "all") {
-    filteredData = data.filter((hotel) => hotel.country == textSelected);
-  }
+  applyFilters();
   main.innerHTML = "";
   loadInformation(filteredData);
+  if (shouldShowMessage) {
+    showMessage(
+      "¡Welcome to BOOK IT! We show you the hotels available for the country you selected"
+    );
+  }
+  console.log(filteredData);
 });
 
 // FILTER PRICES
 const filterPrices = document.getElementById("filter-prices");
 filterPrices.addEventListener("change", () => {
-  filterCountries.selectedIndex = 0;
-  dateCheckIn.value = "";
-  dateCheckOut.value = "";
-  let priceOptions = filterPrices.value;
-  let priceSelect = filterPrices.options[filterPrices.selectedIndex];
-  const textPreiceSelected = priceSelect.textContent;
-  const changeToNumber = symbolToNumber(textPreiceSelected);
-  let filteredPriceData = data;
-  if (priceOptions != "All") {
-    filteredPriceData = data.filter((hotel) => hotel.price == changeToNumber);
-  }
+  applyFilters();
   main.innerHTML = "";
-  loadInformation(filteredPriceData);
+  loadInformation(filteredData);
+  if (shouldShowMessage) {
+    showMessage(
+      "Welcome to BOOK IT! we show you the hotels available for the selected price"
+    );
+  }
+  console.log(filteredData);
 });
 
 // FILTER DATE
@@ -132,6 +180,11 @@ dateCheckIn.addEventListener("change", () => {
   const day = parseInt(parts[2]);
   const finalDate = year + "-" + zerodate(month) + "-" + zerodate(day + 1);
   dateCheckOut.setAttribute("min", finalDate);
+  //-------
+  dateCheckOutSelected = false;
+  applyFilters();
+  main.innerHTML = "";
+  loadInformation(filteredData);
 });
 
 function isHotelAvailable(hotel, differenceInMilliseconds) {
@@ -148,35 +201,29 @@ function calculateDifferenceDays() {
   const optionCheckInIni = new Date(dateCheckIn.value + " 00:00:00");
   optionCheckInIni.setHours(0, 0, 0, 0);
   const optionCheckIn = optionCheckInIni.getTime();
-  if (!dateCheckOutSelected) {
+
+  if (dateCheckOut.value == "") {
     return;
   }
   const optionCheckOut = new Date(dateCheckOut.value);
   const millisecondsDate = optionCheckOut - optionCheckIn;
   const millisecondsInADay = 24 * 60 * 60 * 1000; // 86,400,000
-  const differenceInMilliseconds =
-    Math.round(millisecondsDate / millisecondsInADay) * millisecondsInADay;
-  const hotelesDisponibles = data.filter((hotel) => {
-    return isHotelAvailable(hotel, differenceInMilliseconds);
-  });
-  main.innerHTML = "";
-  if (hotelesDisponibles.length > 0) {
-    loadInformation(hotelesDisponibles);
-  } else {
-    main.innerHTML =
-      "¡lo siento! No hay hoteles disponibles para este rango de fecha.";
-    main.style.color = "red";
-  }
+  return Math.round(millisecondsDate / millisecondsInADay) * millisecondsInADay;
 }
-
 dateCheckIn.value = "";
 dateCheckOut.value = "";
-dateCheckIn.addEventListener("change", calculateDifferenceDays);
-dateCheckOut.addEventListener("change", function () {
-  filterCountries.selectedIndex = 0;
-  filterPrices.selectedIndex = 0;
+
+dateCheckOut.addEventListener("change", () => {
   dateCheckOutSelected = true;
-  calculateDifferenceDays();
+  applyFilters();
+  main.innerHTML = "";
+  loadInformation(filteredData);
+  if (shouldShowMessage) {
+    showMessage(
+      "¡Welcome to BOOK IT! we show you the hotels available on the selected date"
+    );
+  }
+  console.log(filteredData);
 });
 
 // DELETE FILTER BUTTON CLEAR
@@ -187,7 +234,9 @@ resetBtn.addEventListener("click", () => {
   dateCheckIn.value = "";
   dateCheckOut.value = "";
   dateCheckOutSelected = false;
-  calculateDifferenceDays();
+  applyFilters();
   main.innerHTML = "";
-  loadInformation(data);
+  loadInformation(filteredData);
+  showMessage("");
+  console.log(filteredData);
 });
