@@ -133,7 +133,6 @@ filterCountries.addEventListener("change", () => {
       "¡Welcome to BOOK IT! We show you the hotels available for the country you selected"
     );
   }
-  console.log(filteredData);
 });
 
 // FILTER PRICES
@@ -147,7 +146,6 @@ filterPrices.addEventListener("change", () => {
       "Welcome to BOOK IT! we show you the hotels available for the selected price"
     );
   }
-  console.log(filteredData);
 });
 
 // FILTER DATE
@@ -180,7 +178,6 @@ dateCheckIn.addEventListener("change", () => {
   const day = parseInt(parts[2]);
   const finalDate = year + "-" + zerodate(month) + "-" + zerodate(day + 1);
   dateCheckOut.setAttribute("min", finalDate);
-  //-------
   dateCheckOutSelected = false;
   applyFilters();
   main.innerHTML = "";
@@ -223,7 +220,6 @@ dateCheckOut.addEventListener("change", () => {
       "¡Welcome to BOOK IT! we show you the hotels available on the selected date"
     );
   }
-  console.log(filteredData);
 });
 
 // DELETE FILTER BUTTON CLEAR
@@ -238,5 +234,4 @@ resetBtn.addEventListener("click", () => {
   main.innerHTML = "";
   loadInformation(filteredData);
   showMessage("");
-  console.log(filteredData);
 });
