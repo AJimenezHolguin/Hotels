@@ -235,3 +235,4 @@ resetBtn.addEventListener("click", () => {
   loadInformation(filteredData);
   showMessage("");
 });
+
