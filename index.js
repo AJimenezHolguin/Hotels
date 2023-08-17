@@ -1,7 +1,7 @@
 import { requestingHotels } from "./src/hotels.js";
 
 function getFlagImageUrl(country) {
-  const flagp = `./images/${country}-flags.png`;
+  const flagp = `./images/${country}-flag.png`;
   return flagp;
 }
 // CHANGE TEXT TO SYMBOL
