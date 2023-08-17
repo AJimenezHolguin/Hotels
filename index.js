@@ -12,7 +12,6 @@ function getPriceText(price) {
 function symbolToNumber(text) {
   return text.split("$").length - 1;
 }
-
 const main = document.querySelector(".container-general_cards");
 const respuesta = await requestingHotels();
 const data = await respuesta.json();
@@ -209,7 +208,6 @@ function calculateDifferenceDays() {
 }
 dateCheckIn.value = "";
 dateCheckOut.value = "";
-
 dateCheckOut.addEventListener("change", () => {
   dateCheckOutSelected = true;
   applyFilters();
@@ -235,3 +233,4 @@ resetBtn.addEventListener("click", () => {
   loadInformation(filteredData);
   showMessage("");
 });
+
