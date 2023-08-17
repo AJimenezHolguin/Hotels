@@ -219,7 +219,6 @@ dateCheckOut.addEventListener("change", () => {
     );
   }
 });
-
 // DELETE FILTER BUTTON CLEAR
 const resetBtn = document.getElementById("filter");
 resetBtn.addEventListener("click", () => {
