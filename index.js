@@ -209,7 +209,6 @@ function calculateDifferenceDays() {
 }
 dateCheckIn.value = "";
 dateCheckOut.value = "";
-
 dateCheckOut.addEventListener("change", () => {
   dateCheckOutSelected = true;
   applyFilters();
