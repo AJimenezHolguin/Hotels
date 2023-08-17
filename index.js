@@ -12,7 +12,6 @@ function getPriceText(price) {
 function symbolToNumber(text) {
   return text.split("$").length - 1;
 }
-
 const main = document.querySelector(".container-general_cards");
 const respuesta = await requestingHotels();
 const data = await respuesta.json();
@@ -220,7 +219,6 @@ dateCheckOut.addEventListener("change", () => {
     );
   }
 });
-
 // DELETE FILTER BUTTON CLEAR
 const resetBtn = document.getElementById("filter");
 resetBtn.addEventListener("click", () => {
